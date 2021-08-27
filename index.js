@@ -1,4 +1,5 @@
 const { loadYamlFile, } = require('./lib/yaml');
+const path = require('path');
 const {
   ensureDir,
   writeJson,
@@ -13,7 +14,7 @@ const TARGET_BASE_DIR = 'result';
 
 async function main() {
 
-  const path = require('path');
+  const imageDownload = process.argv.some(x => x === '--include-images');
 
   try {
 
@@ -33,7 +34,7 @@ async function main() {
     await writeJson(path.join(TARGET_BASE_DIR, 'links.json'), links);
 
     for (const record of records) {
-      await processPost(record);
+      await processPost(record, { imageDownload });
     }
 
   } catch (err) {
