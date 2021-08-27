@@ -29,6 +29,9 @@ async function main() {
 
     const records = posts.map(x => transformPost(x, { baseDir: TARGET_BASE_DIR }));
 
+    const links = records.filter(x => x.slug && x.links?.length > 0).map(x => [x.slug, x.links]);
+    await writeJson(path.join(TARGET_BASE_DIR, 'links.json'), links);
+
     for (const record of records) {
       await processPost(record);
     }
