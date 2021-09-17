@@ -32,7 +32,7 @@ FROM `wp_posts` AS p
   LEFT JOIN `wp_posts` AS i
     ON i.`ID` = m.`meta_value`
 
-WHERE p.`post_type` = 'post' AND p.`post_status` IN ('publish', 'draft')
+WHERE p.`post_type` = 'post'
 
 GROUP BY
   p.`ID`
